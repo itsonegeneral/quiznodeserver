@@ -57,9 +57,9 @@ app.get('/time',(req,res)=>{
 app.get('/addquestion',(req,res)=>{
     console.log(req.query.question);
     var quest = JSON.parse(req.query.question);
-    var query = "INSERT INTO questions " +  '(question,option1,option2,option3,option4,answer,parentCategory,category,level) ' + 
+    var query = "INSERT INTO questions " +  '(question,option1,option2,option3,option4,answer,parentCategory,category,level,adminEmail) ' + 
                     " VALUES ( '" + quest.question + "','" + quest.option1 + "','" + quest.option2 + "','" + quest.option3 + "','" + quest.option4 + "','" + 
-                    quest.answer + "','" + quest.parentCategory + "','" +quest.category + "'," +  quest.level + ");";
+                    quest.answer + "','" + quest.parentCategory + "','" +quest.category + "'," +  quest.level + ",'" + quest.adminEmail+ "');";
     console.log("\n" + query +"\n");
 
     mysqlConnection.query(query,(err,rows,fields)=>{
