@@ -91,11 +91,8 @@ app.get('/addquestion',(req,res)=>{
     })
 });
 
-app.get('/getQuestion',(req,res)=>{
+app.get('/getquestions',(req,res)=>{
     var category = req.query.category;
-    var level = req.query.level;
-
-    console.log('osodsd');
 
     var query = "SELECT * from questions where category = '" + category +"' ;"
 
