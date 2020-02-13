@@ -25,9 +25,6 @@ var mysqlConnection = mysql.createConnection({
 mysqlConnection.connect((err)=>{
     if(!err){
         console.log('Connected');
-        mysqlConnection.query("select * from questions",(err,rows,fields)=>{
-            console.log(rows);
-        })
     }else{
         console.log("Failed "+ JSON.stringify(err))
     }
@@ -93,8 +90,8 @@ app.get('/addquestion',(req,res)=>{
 
 app.get('/getquestions',(req,res)=>{
     var category = req.query.category;
-
-    var query = "SELECT * from questions where category = '" + category +"' ;"
+    var limit = req.query.limit;
+    var query = "SELECT * from questions where category = '" + category +"' ORDER BY RAND() LIMIT " + limit + ";";
 
     mysqlConnection.query(query,(err,rows,fields)=>{
         if(!err){
