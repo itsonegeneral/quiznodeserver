@@ -64,6 +64,13 @@ app.get('/time',(req,res)=>{
 
 app.get('/addquestion',(req,res)=>{
     console.log(req.query.question);
+
+
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    
+
     var quest = JSON.parse(req.query.question);
     var query = "INSERT INTO questions " +  '(question,option1,option2,option3,option4,answer,parentCategory,category,level,adminEmail) ' + 
                     " VALUES ( '" + quest.question + "','" + quest.option1 + "','" + quest.option2 + "','" + quest.option3 + "','" + quest.option4 + "','" + 
