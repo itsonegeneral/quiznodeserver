@@ -5,14 +5,13 @@ var app = express();
 
 app.use(cors());
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    
-};
-app.use(allowCrossDomain());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
 
 
 var mysqlConnection = mysql.createConnection({
@@ -35,7 +34,7 @@ mysqlConnection.connect((err)=>{
 });
 
 
-app.listen(process.env.PORT || 5000,()=>console.log('Listening to port'));
+app.listen(8010,()=>console.log('Listening to port'));
 
 app.get('/test',(req,res)=>{
     var query = "SELECT * FROM questions;"
