@@ -29,7 +29,7 @@ mysqlConnection.connect((err)=>{
 });
 
 
-app.listen(process.env.PORT|5000,()=>console.log('Listening to port'));
+app.listen(process.env.PORT||5000,()=>console.log('Listening to port'));
 
 app.get('/test',(req,res)=>{
     var query = "SELECT * FROM questions;"
