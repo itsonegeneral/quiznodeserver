@@ -29,7 +29,7 @@ mysqlConnection.connect((err)=>{
 });
 
 
-app.listen(process.env.PORT||5000,()=>console.log('Listening to port'));
+app.listen(process.env.PORT||5000,()=>console.log('Listening to port %d'));
 
 app.get('/test',(req,res)=>{
     var query = "SELECT * FROM questions;"
@@ -124,9 +124,14 @@ app.get('/getquestions',(req,res)=>{
 
     mysqlConnection.query(query,(err,rows,fields)=>{
         if(!err){
-           res.set(200).json(rows);
+            var response = {
+                status : "success",
+                data : JSON.parse(JSON.stringify(rows))
+            }
+           res.set(200).json(response);
         }
         else{
+
             res.set(200).json(err);
         }
     })
