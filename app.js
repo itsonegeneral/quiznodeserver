@@ -1,3 +1,6 @@
+
+const mQuestions = require('./modules/questions');
+const mAdmin = require('./modules/admin.js');
 const mysql = require('mysql');
 const express = require('express');
 const cors = require('cors');
@@ -32,20 +35,7 @@ mysqlConnection.connect((err)=>{
 app.listen(process.env.PORT||5000,()=>console.log('Listening to port %d'));
 
 app.get('/test',(req,res)=>{
-    var query = "SELECT * FROM questions;"
-    mysqlConnection.query(query,(err,rows,fields)=>{
-        if(!err){
-            res.set(200).json({
-                status: 'ok',
-                questions : rows
-            });
-        }else{
-            res.set(500).json({
-                status : 'Error',
-                message : JSON.stringify(err)
-            });
-        }
-    });
+    mQuestions.allquestions(req,res,mysqlConnection);
 });
 
 app.get('/time',(req,res)=>{
@@ -57,82 +47,23 @@ app.get('/time',(req,res)=>{
     res.send(response);
 });
 
+//Question Routes
+
 app.get('/addquestion',(req,res)=>{
-    console.log(req.query.question);
-
-
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-    
-
-    var quest = JSON.parse(req.query.question);
-    var query = "INSERT INTO questions " +  '(question,option1,option2,option3,option4,answer,parentCategory,category,level,adminEmail) ' + 
-                    " VALUES ( '" + quest.question + "','" + quest.option1 + "','" + quest.option2 + "','" + quest.option3 + "','" + quest.option4 + "','" + 
-                    quest.answer + "','" + quest.parentCategory + "','" +quest.category + "'," +  quest.level + ",'" + quest.adminEmail+ "');";
-    console.log("\n" + query +"\n");
-
-    mysqlConnection.query(query,(err,rows,fields)=>{
-        if(!err){
-            res.json({
-                status : 'sucess'
-            })
-        }else{
-            res.set(500).json({
-                status : "Error",
-                message : JSON.stringify(err)
-            })
-        }
-    })
+    mQuestions.addquestion(req,res,mysqlConnection);
 });
 
-app.get('/totalstatus',(req,res)=>{
-    var query = "SELECT count(*),category from questions group by category";
-
-    mysqlConnection.query(query,(err,rows,fields)=>{
-        if(!err){
-            var array = [];
-
-            var response = {
-                status : 'success',
-                data : JSON.parse(JSON.stringify(rows))
-            }
-            res.set(200).json(response);
-        }else{
-            res.set(500).json(err);
-        }
-    });
-});
-
-
-app.get('/userstatus',(req,res)=>{
-    var query = "SELECT count(*),adminemail from questions group by adminemail";
-    mysqlConnection.query(query,(err,rows,fields)=>{
-        if(!err){
-            res.set(200).json(rows);
-        }else{
-            res.set(500).json(err);
-        }
-    });
-});
 
 app.get('/getquestions',(req,res)=>{
-    console.log('Get Questions');
-    var category = req.query.category;
-    var limit = req.query.limit;
-    var query = "SELECT * from questions where category = '" + category +"' ORDER BY RAND() LIMIT " + limit + ";";
+    mQuestions.getquestions(req,res,mysqlConnection);
+});
 
-    mysqlConnection.query(query,(err,rows,fields)=>{
-        if(!err){
-            var response = {
-                status : "success",
-                data : JSON.parse(JSON.stringify(rows))
-            }
-           res.set(200).json(response);
-        }
-        else{
+//Admin Dashboard routes
 
-            res.set(200).json(err);
-        }
-    })
+app.get('/totalstatus',(req,res)=>{
+   mAdmin.totalstatus(req,res,mysqlConnection);
+});
+
+app.get('/adminstatus',(req,res)=>{
+    mAdmin.adminstatus(req,res,mysqlConnection);
 });
