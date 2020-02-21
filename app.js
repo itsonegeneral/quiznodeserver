@@ -32,7 +32,7 @@ mysqlConnection.connect((err)=>{
 });
 
 
-app.listen(process.env.PORT||5000,()=>console.log('Listening to port %d'));
+app.listen(process.env.PORT||8080,()=>console.log('Listening to port %d'));
 
 app.get('/test',(req,res)=>{
     mQuestions.allquestions(req,res,mysqlConnection);
