@@ -32,7 +32,7 @@ mysqlConnection.connect((err)=>{
 });
 
 
-app.listen(process.env.PORT||8080,()=>console.log('Listening to port %d'));
+app.listen(process.env.PORT||5000,()=>console.log('Listening to port %d'));
 
 app.get('/test',(req,res)=>{
     mQuestions.allquestions(req,res,mysqlConnection);
@@ -58,7 +58,7 @@ app.get('/getquestions',(req,res)=>{
     mQuestions.getquestions(req,res,mysqlConnection);
 });
 
-//Admin Dashboard routes
+//Admin Dashboard
 
 app.get('/totalstatus',(req,res)=>{
    mAdmin.totalstatus(req,res,mysqlConnection);
