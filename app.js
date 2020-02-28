@@ -67,3 +67,9 @@ app.get('/totalstatus',(req,res)=>{
 app.get('/adminstatus',(req,res)=>{
     mAdmin.adminstatus(req,res,mysqlConnection);
 });
+
+//User modules
+
+app.get('/getcategories',(req,res)=>{
+    mAdmin.getCategories(req,res,mysqlConnection);
+});

@@ -27,3 +27,30 @@ module.exports.adminstatus = function(req,res,con){
         }
     });
 }
+
+module.exports.getCategories = function(req,res,con){
+    let query = "SELECT * FROM categories";
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            
+            var data = JSON.parse(JSON.stringify(rows));
+            var categories  = [];
+            var parentCategories = [];
+            for(var i =0 ;i<data.length ;i ++){
+                if(data[i].type === "subcategory"){
+                    categories.push(data[i]);
+                }else{
+                    parentCategories.push(data[i]);
+                }
+            }
+            var response = {
+                status : "success",
+                categories,
+                parentCategories
+            }
+            res.set(200).json(response);
+        }else{
+            res.set(500).json(err);
+        }
+    });
+}
