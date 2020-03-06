@@ -1,6 +1,7 @@
 
 const mQuestions = require('./modules/questions');
 const mAdmin = require('./modules/admin.js');
+const mGameplay = require('./modules/gameplay');
 const mysql = require('mysql');
 const express = require('express');
 const cors = require('cors');
@@ -85,6 +86,10 @@ app.get('/adminstatus',(req,res)=>{
 app.get('/getcategories',(req,res)=>{
     mAdmin.getCategories(req,res,mysqlConnection);
 });
+
+app.get('/getquizoptions',(req,res)=>{
+    mGameplay.getquizoptions(req,res,mysqlConnection);
+})
 
 
 
