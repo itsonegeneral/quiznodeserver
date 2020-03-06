@@ -1,7 +1,7 @@
 
 const mQuestions = require('./modules/questions');
 const mAdmin = require('./modules/admin.js');
-const mGameplay = require('./modules/gameplay');
+const mGameplay = require('./modules/gameplay.js');
 const mysql = require('mysql');
 const express = require('express');
 const cors = require('cors');
@@ -88,8 +88,8 @@ app.get('/getcategories',(req,res)=>{
 });
 
 app.get('/getquizoptions',(req,res)=>{
-    mGameplay.getquizoptions(req,res,mysqlConnection);
-})
+    mGameplay.getoptions(req,res,mysqlConnection);
+});
 
 
 
