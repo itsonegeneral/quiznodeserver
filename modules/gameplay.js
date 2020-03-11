@@ -3,7 +3,7 @@
 module.exports.getoptions = function(req,res,con){
     const cat  = req.query.category;
     console.log()
-    let query = "SELECT * from quizoptions,categories where categoryName='" + cat + "';"
+    let query = "SELECT * from quizoptions,categories where categoryName='" + cat + "' and quizoptions.catid = categories.id;"
     con.query(query,(err,rows,feilds)=>{
         if(!err){
             var data = {
