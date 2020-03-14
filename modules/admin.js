@@ -57,7 +57,13 @@ module.exports.getCategories = function(req,res,con){
 
 module.exports.getSubCategories = function(req,res,con){
     let cat = req.query.category;
-    let query = "SELECT * FROM categories WHERE type='subcategory' AND parentCategory='" +cat  + "';" 
+    let query ;
+    if(cat === undefined){
+        query= "SELECT * FROM categories WHERE type='subcategory' ;" 
+    }else{
+        query= "SELECT * FROM categories WHERE type='subcategory' AND parentCategory='" +cat  + "';" 
+    }
+    
 
     con.query(query,(err,rows,fields)=>{
         if(!err){
