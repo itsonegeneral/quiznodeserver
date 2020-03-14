@@ -81,6 +81,10 @@ app.get('/adminstatus',(req,res)=>{
     mAdmin.adminstatus(req,res,mysqlConnection);
 });
 
+app.get('/getsubcategories',(req,res)=>{
+    mAdmin.getSubCategories(req,res,mysqlConnection);
+})
+
 //User modules
 
 app.get('/getcategories',(req,res)=>{

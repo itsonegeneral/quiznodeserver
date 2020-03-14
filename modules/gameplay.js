@@ -16,3 +16,6 @@ module.exports.getoptions = function(req,res,con){
         }
     });
 }
+
+module.exports.setquizoptions = function(req,res,con){
+}

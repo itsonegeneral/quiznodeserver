@@ -54,3 +54,20 @@ module.exports.getCategories = function(req,res,con){
         }
     });
 }
+
+module.exports.getSubCategories = function(req,res,con){
+    let cat = req.query.category;
+    let query = "SELECT * FROM categories WHERE type='subcategory' AND parentCategory='" +cat  + "';" 
+
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            res.set(200).json({
+                status : "success",
+                data : JSON.parse(JSON.stringify(rows))
+            });
+        }else{
+            res.set(500).json(err);
+        }
+    });
+
+}
