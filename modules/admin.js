@@ -77,3 +77,8 @@ module.exports.getSubCategories = function(req,res,con){
     });
 
 }
+
+exports.module.addquizoption = function(req,res,con){
+    let option = res.query.option;
+    console.log(option);
+}
