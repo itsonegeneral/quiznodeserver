@@ -91,6 +91,11 @@ app.get('/addquizoption',(req,res)=>{
 app.get('/getquizoptions',(req,res)=>{
     mAdmin.getquizoptions(req,res,mysqlConnection);
 })
+
+app.get('/getadminquestions',(req,res)=>{
+    mAdmin.getadminquestions(req,res,mysqlConnection);
+});
+
 //User modules
 
 app.get('/getcategories',(req,res)=>{

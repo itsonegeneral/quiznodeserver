@@ -120,4 +120,27 @@ module.exports.getquizoptions = function(req,res,con){
     })
 
 }
+module.exports.getadminquestions = function(req,res,con){
+    let email = req.query.email;
+    let query;
+    console.log(email);
+    if(email === undefined){
+        query = "SELECT * FROM questions ORDER BY id;"
+    }else{
+        console.log(email);
+        query = "SELECT * FROM questions WHERE adminemail='" + email + "' ORDER BY id ASC;";
+    }
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+        
+            res.set(200).json({
+                status: 'success',
+                data : JSON.parse(JSON.stringify(rows))
+            })
+        }else{
+            res.set(500).json(err);
+        
+        }
+    });
+}
 
