@@ -79,6 +79,22 @@ module.exports.getSubCategories = function(req,res,con){
 }
 
 module.exports.addquizoption = function(req,res,con){
-    let option = res.query.option;
+    let option = JSON.parse(req.query.option);
     console.log(option);
+    let query = "INSERT INTO quizoptions (title,catid,rewardcoins,description,entrycoins,gametime,questionsize,difficulty) VALUES ('" + option.title +"'," + 
+                        option.catid + "," + option.rewardcoins + ",'" + option.description + "'," + option.entrycoins+ "," + option.gametime +"," +
+                        option.questionsize + "," + option.difficulty + ");";
+
+    console.log(query);
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            res.set(200).json({
+                status : 'success'
+            })
+            console.log("Added question")
+        }else{
+            console.log(err);
+            res.set(500).json(err);
+        }
+    });
 }
