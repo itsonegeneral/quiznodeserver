@@ -88,7 +88,9 @@ app.get('/getsubcategories',(req,res)=>{
 app.get('/addquizoption',(req,res)=>{
     mAdmin.addquizoption(req,res,mysqlConnection);
 })
-
+app.get('/getquizoptions',(req,res)=>{
+    mAdmin.getquizoptions(req,res,mysqlConnection);
+})
 //User modules
 
 app.get('/getcategories',(req,res)=>{

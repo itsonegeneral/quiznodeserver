@@ -107,7 +107,17 @@ module.exports.getquizoptions = function(req,res,con){
     }else{
         query = "SELECT * FROM quizoptions,categories WHERE quizoptions.catid = categories.id AND categoryName='" + cat  + "';"
     }
-    
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            let resp ={
+                status : 'success',
+                data : JSON.parse(JSON.stringify(rows))
+            }
+            res.set(200).json(resp);
+        }else{
+            res.set(500).json(rows);
+        }
+    })
 
 }
 
