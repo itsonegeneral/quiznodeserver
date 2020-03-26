@@ -98,3 +98,16 @@ module.exports.addquizoption = function(req,res,con){
         }
     });
 }
+
+module.exports.getquizoptions = function(req,res,con){
+    let cat = req.query.cat;
+    let query = '';
+    if(cat === undefined){
+        query = "SELECT * FROM quizoptions ;"
+    }else{
+        query = "SELECT * FROM quizoptions,categories WHERE quizoptions.catid = categories.id AND categoryName='" + cat  + "';"
+    }
+    
+
+}
+
