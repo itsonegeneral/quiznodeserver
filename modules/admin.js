@@ -152,7 +152,7 @@ module.exports.deletequestion = function(req,res,con){
         });
         return;
     }
-    let id= res.query.id;
+    let id= req.query.id;
     let query = "DELETE FROM questions WHERE id=" + id + ";";
     con.query(query,(err,row,fields)=>{
         if(!err){
@@ -161,7 +161,8 @@ module.exports.deletequestion = function(req,res,con){
                 message :'Question Deleted'
             })
         }else{
-
+            res.set(500).json(err);
+            console.log(err);
         }
     });
 }

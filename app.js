@@ -7,6 +7,7 @@ const express = require('express');
 const cors = require('cors');
 var app = express();
 var dataArray = [];
+const axios = require('axios');
 const fs = require('fs');
 
 
@@ -19,23 +20,14 @@ app.use(function(req, res, next) {
     next();
   });
 
-  /*
 var mysqlConnection = mysql.createConnection({
-    host:'knackdb.cigwhmgnsi5e.us-east-2.rds.amazonaws.com',
-    user : 'knackrootadmin', 
-    password:'adminknack',
+    host:'mysql5025.site4now.net',
+    user : 'a56f9c_knackap',
+    password:'knackdatabase1',
     port:'3306',
-    database : 'knackapp'
+    database : 'db_a56f9c_knackap'
 });
 
-*/
-var mysqlConnection = mysql.createConnection({
-    host:'sql12.freemysqlhosting.net',
-    user : 'sql12326048',
-    password:'tulp2jG9H3',
-    port:'3306',
-    database : 'sql12326048'
-});
 
 
 mysqlConnection.connect((err)=>{
@@ -101,7 +93,6 @@ app.get('/getadminquestions',(req,res)=>{
 app.get('/deletequestion',(req,res)=>{
     mAdmin.deletequestion(req,res,mysqlConnection);
 });
-
 //User modules
 
 app.get('/getcategories',(req,res)=>{
