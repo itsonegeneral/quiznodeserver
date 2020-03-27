@@ -60,6 +60,8 @@ app.get('/time',(req,res)=>{
     res.send(response);
 });
 
+
+
 //Question Routes
 
 app.get('/addquestion',(req,res)=>{
@@ -94,6 +96,10 @@ app.get('/getquizoptions',(req,res)=>{
 
 app.get('/getadminquestions',(req,res)=>{
     mAdmin.getadminquestions(req,res,mysqlConnection);
+});
+
+app.get('/deletequestion',(req,res)=>{
+    mAdmin.deletequestion(req,res,mysqlConnection);
 });
 
 //User modules

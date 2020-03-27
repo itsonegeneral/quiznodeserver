@@ -144,3 +144,24 @@ module.exports.getadminquestions = function(req,res,con){
     });
 }
 
+module.exports.deletequestion = function(req,res,con){
+    if(req.query.id === undefined){
+        res.set(200).json({
+            status : 'failed',
+            message : 'question id required'
+        });
+        return;
+    }
+    let id= res.query.id;
+    let query = "DELETE FROM questions WHERE id=" + id + ";";
+    con.query(query,(err,row,fields)=>{
+        if(!err){
+            res.set(200).json({
+                status: 'success',
+                message :'Question Deleted'
+            })
+        }else{
+
+        }
+    });
+}

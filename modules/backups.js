@@ -43,3 +43,16 @@ app.get('/restore',(req,res)=>{
     }
 
 });
+
+
+
+connection.query('select * from db.table;', function(err, results, fields) {
+    if(err) throw err;
+
+    fs.writeFile('table.json', JSON.stringify(results), function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    });
+
+    connection.end();
+});
