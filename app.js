@@ -33,14 +33,18 @@ var mysqlConnection = mysql.createConnection({
 mysqlConnection.connect((err)=>{
     if(!err){
     console.log('Connected');
-
+    setInterval(()=>{
+        console.log("Server refreshed");
+        mysqlConnection.query("SELECT * from categories");
+    },5000);
     }else{
         console.log("Failed "+ JSON.stringify(err))
     }
 });
 
 
-app.listen(process.env.PORT||8080,()=>console.log('Listening to port %d'));
+
+app.listen(process.env.PORT||8080,()=>console.log('Listening to port %d',process.env.PORT));
 
 
 app.get('/time',(req,res)=>{
