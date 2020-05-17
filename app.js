@@ -36,7 +36,7 @@ mysqlConnection.connect((err)=>{
     setInterval(()=>{
         console.log("Server refreshed");
         mysqlConnection.query("SELECT * from categories");
-    },5000);
+    },10000);
     }else{
         console.log("Failed "+ JSON.stringify(err))
     }
@@ -74,6 +74,19 @@ app.get('/getquestions',(req,res)=>{
 app.get('/totalstatus',(req,res)=>{
    mAdmin.totalstatus(req,res,mysqlConnection);
 });
+
+app.get('/',(req,res)=>{
+    res.writeHead(200,{'Content-Type':'text/html'});
+    fs.readFile('./html/index.html',(error,data)=>{
+        if(error){
+            res.write(error);
+        }
+        else{
+          res.write(data);
+        }
+    })
+ });
+ 
 
 app.get('/adminstatus',(req,res)=>{
     mAdmin.adminstatus(req,res,mysqlConnection);
