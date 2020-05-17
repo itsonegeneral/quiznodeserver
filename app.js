@@ -10,6 +10,8 @@ var dataArray = [];
 const axios = require('axios');
 const fs = require('fs');
 
+//to remove the huge latency of serving web pages
+app.use(express.static(__dirname + '/html'));
 
 app.use(cors());
 
@@ -27,8 +29,6 @@ var mysqlConnection = mysql.createConnection({
     port:'3306',
     database : 'db_a56f9c_knackap'
 });
-
-
 
 mysqlConnection.connect((err)=>{
     if(!err){
