@@ -28,7 +28,7 @@ var mysqlConnection = mysql.createConnection({
     password:'knackdatabase1',
     port:'3306',
     database : 'db_a56f9c_knackap'
-});
+}); 
 
 mysqlConnection.connect((err)=>{
     if(!err){
@@ -36,9 +36,10 @@ mysqlConnection.connect((err)=>{
     setInterval(()=>{
         console.log("Server refreshed");
         mysqlConnection.query("SELECT * from categories");
-    },10000);
+    },7000);
     }else{
-        console.log("Failed "+ JSON.stringify(err))
+        console.log("Failed with errorno :"+err.errno + " and Errorcode : "+ err.code);
+        mysqlConnection.connect((err)=>{});
     }
 });
 
