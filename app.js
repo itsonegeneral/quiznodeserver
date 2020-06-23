@@ -2,19 +2,23 @@
 const mQuestions = require('./modules/questions');
 const mAdmin = require('./modules/admin.js');
 const mGameplay = require('./modules/gameplay.js');
+const mFriends = require('./modules/friends.js');
 const mysql = require('mysql');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 var app = express();
 var dataArray = [];
 const axios = require('axios');
 const fs = require('fs');
 
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 //to remove the huge latency of serving web pages
 app.use(express.static(__dirname + '/html'));
-
-app.use(cors());
-
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -120,3 +124,9 @@ app.get('/getcategories',(req,res)=>{
 app.get('/getquizoptions',(req,res)=>{
     mGameplay.getoptions(req,res,mysqlConnection);
 });
+
+//Friend management
+
+app.post('/friends/sendrequest',(req,res)=>{
+    mFriends.sendFriendRequest(req,res,mysqlConnection);
+})
