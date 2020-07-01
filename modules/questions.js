@@ -10,7 +10,7 @@ module.exports.getquestions= function (req,res,con) {
         var limit =  parseInt(req.body.limit);
         var query = "SELECT * from questions where category = '" + category +"' ORDER BY RAND() LIMIT " + limit + ";";
 
-        console.log(limit + category)
+        console.log(limit +" "+ category)
         con.query(query,(err,rows,fields)=>{
             if(!err){
                 var response = {
