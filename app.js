@@ -130,3 +130,18 @@ app.get('/getquizoptions',(req,res)=>{
 app.post('/friends/sendrequest',(req,res)=>{
     mFriends.sendFriendRequest(req,res,mysqlConnection);
 })
+
+app.post('/payments/createrequest',(req,res)=>{
+    let QUERY = "INSERT INTO paymentrequests (userid,amount) VALUES('" + req.body.userid + "'," + req.body.amount +");"
+    console.log(QUERY);
+    mysqlConnection.query(QUERY,(err,rows,feild)=>{
+        if(!err){
+            res.set(200).json({
+                status :"success",
+                message :"Payment request has been sumbitted"
+            })
+        }else{
+            res.json(err);
+        }
+    })
+});
