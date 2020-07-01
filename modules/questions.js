@@ -7,7 +7,7 @@ var app = express();
 module.exports.getquestions= function (req,res,con) {
         console.log('Get Questions');
         var category = req.body.category;
-        var limit = req.body.limit;
+        var limit =  parseInt(req.body.limit);
         var query = "SELECT * from questions where category = '" + category +"' ORDER BY RAND() LIMIT " + limit + ";";
     
         con.query(query,(err,rows,fields)=>{
