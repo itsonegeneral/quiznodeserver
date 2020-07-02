@@ -52,3 +52,18 @@ module.exports.createLeaderboard = function(req,res,con){
         }
     });
 }
+
+module.exports.getLeaderBoard = function(req,res,con){
+    let query = "SELECT * FROM leaderboard ORDER BY totalScore;"
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            let response = {
+                status : "success",
+                data : JSON.parse(JSON.stringify(rows))
+            }
+            res.set(200).json(response);
+        }else{
+            res.set(rows);
+        }
+    });
+}

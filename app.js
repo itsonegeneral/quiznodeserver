@@ -133,6 +133,9 @@ app.post('/createleaderboard',(req,res)=>{
     mGameplay.createLeaderboard(req,res,mysqlConnection);
 });
 
+app.get('/getleaderboard',(req,res)=>{
+    mGameplay.getLeaderBoard(req,res,mysqlConnection);
+});
 //Friend management
 
 app.post('/friends/sendrequest',(req,res)=>{
