@@ -129,6 +129,10 @@ app.post('/setleaderboard',(req,res)=>{
     mGameplay.addLeaderboardEntry(req,res,mysqlConnection);
 });
 
+app.post('/createleaderboard',(req,res)=>{
+    mGameplay.createLeaderboard(req,res,mysqlConnection);
+});
+
 //Friend management
 
 app.post('/friends/sendrequest',(req,res)=>{
