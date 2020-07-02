@@ -125,6 +125,10 @@ app.get('/getquizoptions',(req,res)=>{
     mGameplay.getoptions(req,res,mysqlConnection);
 });
 
+app.post('/setleaderboard',(req,res)=>{
+    mGameplay.addLeaderboardEntry(req,res,mysqlConnection);
+});
+
 //Friend management
 
 app.post('/friends/sendrequest',(req,res)=>{

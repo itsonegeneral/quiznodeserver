@@ -19,3 +19,15 @@ module.exports.getoptions = function(req,res,con){
 
 module.exports.setquizoptions = function(req,res,con){
 }
+
+module.exports.addLeaderboardEntry = function(req,res,con){
+    console.log(req.body.playerid);
+    let query = "UPDATE leaderboard"
+    res.set(200).json({
+        s:""
+    })
+}
+
+module.exports.createLeaderboard = function(req,res,con){
+    console.log(req.body.playerid);
+}
