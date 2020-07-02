@@ -30,4 +30,9 @@ module.exports.addLeaderboardEntry = function(req,res,con){
 
 module.exports.createLeaderboard = function(req,res,con){
     console.log(req.body.playerid);
+    if(req.body.playerid === undefined){
+        res.json({
+            message:"Player ID required"
+        });
+    }
 }

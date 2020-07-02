@@ -32,7 +32,6 @@ module.exports.getCategories = function(req,res,con){
     let query = "SELECT * FROM categories";
     con.query(query,(err,rows,fields)=>{
         if(!err){
-         f   
             var data = JSON.parse(JSON.stringify(rows));
             var categories  = [];
             var parentCategories = [];
