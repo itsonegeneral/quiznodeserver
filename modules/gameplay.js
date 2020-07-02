@@ -54,7 +54,7 @@ module.exports.createLeaderboard = function(req,res,con){
 }
 
 module.exports.getLeaderBoard = function(req,res,con){
-    let query = "SELECT * FROM leaderboard ORDER BY totalScore;"
+    let query = "SELECT * FROM leaderboard ORDER BY totalScore DESC;"
     con.query(query,(err,rows,fields)=>{
         if(!err){
             let response = {
