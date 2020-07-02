@@ -129,7 +129,7 @@ app.post('/setleaderboard',(req,res)=>{
     mGameplay.addLeaderboardEntry(req,res,mysqlConnection);
 });
 
-app.get('/createleaderboard',(req,res)=>{
+app.post('/createleaderboard',(req,res)=>{
     mGameplay.createLeaderboard(req,res,mysqlConnection);
 });
 

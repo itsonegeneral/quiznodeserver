@@ -30,9 +30,17 @@ module.exports.addLeaderboardEntry = function(req,res,con){
 
 module.exports.createLeaderboard = function(req,res,con){
     console.log(req.body.playerid);
+    let query = "INSERT INTO leaderboard (playerID) VALUES ('"+req.body.playerid+"');"
     if(req.body.playerid === undefined){
         res.json({
             message:"Player ID required"
         });
     }
+    con.query(query,(err,rows,fields)=>{
+        if(!err){
+            
+        }else{
+            console.log(err);
+        }
+    });
 }
